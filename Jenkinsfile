@@ -1,22 +1,35 @@
 pipeline {
+    environment {
+        def mvnHome = tool 'mvn3'
+    }
+
     agent any
 
-    def mvnHome = tool 'mvn3'
-
     stages {
+
         stage('Compile') {
             steps {
-                bat "${mvnHome}\\bin\\mvn clean compile"
+                echo "${mvnHome}"
+                echo "${mvnHome}\\bin\\mvn.bat clean compile"
+                echo bat(returnStdout: true, script: 'set')
+                bat "echo hello"
+                bat "set PATH"
+                bat "set JAVA"
+                bat "${mvnHome}\\bin\\mvn.bat clean compile"
             }
         }
         stage('Test') {
             steps {
-                bat "${mvnHome}\\bin\\mvn test"
+                echo "${mvnHome}"
+                echo "${mvnHome}\\bin\\mvn.bat test"
+                bat "${mvnHome}\\bin\\mvn.bat test"
             }
         }
         stage('Package') {
             steps {
-                bat "${mvnHome}\\bin\\mvn package"
+                echo "${mvnHome}"
+                echo "${mvnHome}\\bin\\mvn.cmd package"
+                bat "${mvnHome}\\bin\\mvn.cmd package"
             }
         }
     }
