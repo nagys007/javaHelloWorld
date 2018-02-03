@@ -1,20 +1,22 @@
 pipeline {
     agent any
 
+    def mvnHome = tool 'mvn3'
+
     stages {
         stage('Compile') {
             steps {
-                bat "mvn clean compile"
+                bat "${mvnHome}\\bin\\mvn clean compile"
             }
         }
         stage('Test') {
             steps {
-                bat "mvn test"
+                bat "${mvnHome}\\bin\\mvn test"
             }
         }
         stage('Package') {
             steps {
-                bat "mvn package"
+                bat "${mvnHome}\\bin\\mvn package"
             }
         }
     }
